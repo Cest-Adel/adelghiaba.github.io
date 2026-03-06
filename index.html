@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio – BTS SIO SISR</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0f1e35;
+      --navy-mid: #1a2f4a;
+      --accent: #1d6fde;
+      --accent-light: #4a90e8;
+      --sky: #e8f2ff;
+      --sage: #3aafa9;
+      --text: #1a2338;
+      --muted: #5e6e85;
+      --border: #dce6f5;
+      --white: #ffffff;
+      --bg: #f4f7fc;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 62px;
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 6rem 6rem 4rem;
+      gap: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      right: -5%;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(29,111,222,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 5%;
+      left: 10%;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(58,175,169,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-text { animation: fadeUp 0.8s ease both; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--sky);
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      border: 1px solid rgba(29,111,222,0.2);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.6rem, 4vw, 3.8rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: var(--navy);
+      margin-bottom: 1.2rem;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 420px;
+      margin-bottom: 2.2rem;
+      font-weight: 300;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.75rem 1.6rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.22s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(29,111,222,0.3);
+    }
+
+    .btn-primary:hover {
+      background: #1560c8;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(29,111,222,0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--navy);
+      border: 1.5px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* HERO VISUAL */
+    .hero-visual {
+      animation: fadeUp 0.8s 0.2s ease both;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-card {
+      background: var(--white);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      padding: 2rem;
+      width: 100%;
+      max-width: 360px;
+      box-shadow: 0 20px 60px rgba(15,30,53,0.08);
+    }
+
+    .hero-avatar {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--sage) 100%);
+      border-radius: 50%;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: white;
+    }
+
+    .hero-card h3 {
+      font-size: 1.1rem;
+      color: var(--navy);
+      margin-bottom: 0.25rem;
+    }
+
+    .hero-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1.4rem;
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .stat {
+      background: var(--bg);
+      border-radius: 10px;
+      padding: 0.75rem 0.5rem;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .skill-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .pill {
+      background: var(--sky);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.3rem 0.7rem;
+      border-radius: 100px;
+      border: 1px solid rgba(29,111,222,0.15);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 5rem 6rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+      color: var(--navy);
+      letter-spacing: -0.02em;
+    }
+
+    /* ABOUT */
+    #about {
+      background: var(--white);
+      border-top: 1px solid var(--border);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .about-text p strong { color: var(--text); }
+
+    .about-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .info-row {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 0.9rem 1.1rem;
+      background: var(--bg);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .info-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--sky);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .info-detail strong {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .info-detail span {
+      font-size: 0.92rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* SKILLS */
+    #skills { background: var(--bg); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      transition: all 0.25s ease;
+    }
+
+    .skill-card:hover {
+      box-shadow: 0 12px 40px rgba(29,111,222,0.1);
+      transform: translateY(-3px);
+      border-color: rgba(29,111,222,0.25);
+    }
+
+    .skill-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .skill-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .skill-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .skill-bar-wrap {
+      margin-bottom: 0.5rem;
+    }
+
+    .skill-bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .skill-bar {
+      height: 5px;
+      background: var(--border);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      border-radius: 100px;
+      width: 0;
+      transition: width 1.2s ease;
+    }
+
+    /* PROJETS */
+    #projets {
+      background: var(--white);
+      border-top: 1px solid var(--border);
+    }
+
+    .projets-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .projet-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.25s ease;
+    }
+
+    .projet-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(15,30,53,0.1);
+    }
+
+    .projet-thumb {
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .projet-body { padding: 1.5rem; }
+
+    .projet-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .projet-body h3 {
+      font-size: 1.05rem;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+
+    .projet-body p {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .projet-techs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .tech-tag {
+      font-size: 0.7rem;
+      background: var(--white);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+      font-weight: 500;
+    }
+
+    /* STAGES */
+    #stages { background: var(--bg); }
+
+    .timeline {
+      position: relative;
+      padding-left: 2.5rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.5rem;
+      top: 8px;
+      width: 12px;
+      height: 12px;
+      background: var(--accent);
+      border-radius: 50%;
+      border: 3px solid var(--bg);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+
+    .timeline-date {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+    }
+
+    .timeline-card h3 {
+      font-size: 1.05rem;
+      color: var(--navy);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-card .company {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .timeline-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .timeline-card ul li {
+      font-size: 0.875rem;
+      color: var(--muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .timeline-card ul li::before {
+      content: '→';
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* CONTACT */
+    #contact {
+      background: var(--navy);
+      text-align: center;
+    }
+
+    #contact h2 {
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    #contact p {
+      color: rgba(255,255,255,0.55);
+      font-size: 1rem;
+      margin-bottom: 2.5rem;
+      max-width: 460px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.8rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.22s;
+    }
+
+    .contact-link-primary {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 4px 20px rgba(29,111,222,0.4);
+    }
+
+    .contact-link-primary:hover {
+      background: #1560c8;
+      transform: translateY(-2px);
+    }
+
+    .contact-link-ghost {
+      background: rgba(255,255,255,0.08);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .contact-link-ghost:hover {
+      background: rgba(255,255,255,0.14);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      background: var(--navy);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero, .about-grid { grid-template-columns: 1fr; padding: 4rem 2rem; }
+      .hero { padding-top: 6rem; }
+      section { padding: 4rem 2rem; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .projets-grid { grid-template-columns: 1fr; }
+      nav { padding: 0 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+    }
+
+    @media (max-width: 580px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .stat-row { grid-template-columns: 1fr 1fr 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Adel <span>Ghiaba</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#skills">Compétences</a></li>
+    <li><a href="#projets">Projets</a></li>
+    <li><a href="#stages">Stages</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">🎓 BTS SIO – Option SISR</div>
+    <h1>Infrastructure<br>& <em>Sécurité</em><br>Réseau</h1>
+    <p class="hero-desc">
+      Étudiant en 2ᵉ année de BTS SIO option SISR, passionné par l'administration réseau, la sécurité et la gestion des systèmes d'exploitation.
+    </p>
+    <div class="hero-cta">
+      <a href="#projets" class="btn btn-primary">Voir mes projets →</a>
+      <a href="#contact" class="btn btn-outline">Me contacter</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="hero-avatar">AG</div>
+      <h3>Adel Ghiaba</h3>
+      <p>BTS SIO SISR · 2ᵉ année</p>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-num">2</span><span class="stat-label">Ans</span></div>
+        <div class="stat"><span class="stat-num">6</span><span class="stat-label">Projets</span></div>
+        <div class="stat"><span class="stat-num">2</span><span class="stat-label">Stages</span></div>
+      </div>
+      <div class="skill-pills">
+        <span class="pill">Cisco</span>
+        <span class="pill">Linux</span>
+        <span class="pill">Windows Server</span>
+        <span class="pill">Firewall</span>
+        <span class="pill">Active Directory</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <div class="section-header">
+        <span class="section-label">À propos</span>
+      </div>
+      <h2>Qui suis-je ?</h2>
+      <br>
+      <p>Étudiant en <strong>BTS SIO option SISR</strong> au lycée Les Chassagnes, je me passionne pour l'administration des systèmes et des réseaux. Mon parcours m'a permis de développer des compétences solides en gestion d'infrastructures et en sécurité informatique.</p>
+      <p>Je maîtrise les environnements <strong>Linux et Windows Server</strong>, la configuration d'équipements réseau (routeurs, switches, pare-feux) ainsi que les protocoles fondamentaux comme TCP/IP, VLAN, VPN et OSPF.</p>
+      <p>À la recherche d'un <strong>stage ou d'une alternance</strong> pour compléter ma formation et contribuer activement à des projets d'infrastructure réseau.</p>
+    </div>
+    <div class="about-info reveal">
+      <div class="info-row">
+        <div class="info-icon">🎓</div>
+        <div class="info-detail">
+          <strong>Formation</strong>
+          <span>BTS SIO – SISR (2ᵉ année)</span>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🏫</div>
+        <div class="info-detail">
+          <strong>Établissement</strong>
+          <span>Lycée Les Chassagnes</span>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">📍</div>
+        <div class="info-detail">
+          <strong>Localisation</strong>
+          <span>Lyon, France</span>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">📧</div>
+        <div class="info-detail">
+          <strong>Email</strong>
+          <span>ghiabad69@gmail.com</span>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🔍</div>
+        <div class="info-detail">
+          <strong>Recherche</strong>
+          <span>Stage / Alternance en infrastructure réseau</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header reveal">
+    <div>
+      <span class="section-label">Compétences</span>
+      <h2>Mes expertises techniques</h2>
+    </div>
+  </div>
+  <div class="skills-grid">
+
+    <div class="skill-card reveal">
+      <div class="skill-icon" style="background:#e8f2ff;">🌐</div>
+      <h3>Réseaux</h3>
+      <p>Conception et configuration de réseaux LAN/WAN, protocoles de routage et commutation.</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>TCP/IP & VLAN</span><span>80%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="80"></div></div>
+      </div>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Cisco IOS / Routage</span><span>70%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="70"></div></div>
+      </div>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>VPN & Pare-feu</span><span>65%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="65"></div></div>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon" style="background:#e2f5f4;">🔒</div>
+      <h3>Sécurité</h3>
+      <p>Audit, durcissement des systèmes, gestion des accès et supervision de la sécurité.</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Firewall / ACL</span><span>70%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="70"></div></div>
+      </div>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>IDS / SIEM</span><span>55%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="55"></div></div>
+      </div>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Chiffrement & PKI</span><span>60%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="60"></div></div>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon" style="background:#fff0e8;">🐧</div>
+      <h3>Linux</h3>
+      <p>Administration de serveurs Linux, scripting Bash et gestion des services.</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Ubuntu / Debian</span><span>75%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="75"></div></div>
+      </div>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Bash / Shell</span><span>65%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="65"></div></div>
+      </div>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Apache / Nginx / SSH</span><span>70%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="70"></div></div>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon" style="background:#eef0ff;">🖥️</div>
+      <h3>Windows Server</h3>
+      <p>Gestion des environnements Windows Server et des services Microsoft.</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Active Directory</span><span>75%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="75"></div></div>
+      </div>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>DNS / DHCP / GPO</span><span>70%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="70"></div></div>
+      </div>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Hyper-V / RDS</span><span>60%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="60"></div></div>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon" style="background:#e8ffe8;">📦</div>
+      <h3>Virtualisation</h3>
+      <p>Déploiement et gestion d'environnements virtualisés et conteneurisés.</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>VirtualBox / VMware</span><span>80%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="80"></div></div>
+      </div>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Proxmox</span><span>55%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="55"></div></div>
+      </div>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Docker (bases)</span><span>45%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="45"></div></div>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon" style="background:#fff5e8;">📋</div>
+      <h3>Supervision & Outils</h3>
+      <p>Monitoring réseau, ticketing et outils d'administration à distance.</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Zabbix / Wazuh</span><span>55%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="55"></div></div>
+      </div>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Wireshark</span><span>65%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="65"></div></div>
+      </div>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>GLPI</span><span>60%</span></div>
+        <div class="skill-bar"><div class="skill-bar-fill" data-width="60"></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJETS -->
+<section id="projets">
+  <div class="section-header reveal">
+    <div>
+      <span class="section-label">Réalisations</span>
+      <h2>Projets & travaux pratiques</h2>
+    </div>
+  </div>
+  <div class="projets-grid">
+
+    <div class="projet-card reveal">
+      <div class="projet-thumb" style="background: linear-gradient(135deg, #e8f2ff, #c5d9f8);">🌐</div>
+      <div class="projet-body">
+        <span class="projet-tag">Infrastructure Réseau</span>
+        <h3>Mise en place d'un réseau d'entreprise</h3>
+        <p>Conception et déploiement d'une infrastructure réseau complète avec segmentation VLAN, routage inter-VLAN et configuration de pare-feu.</p>
+        <div class="projet-techs">
+          <span class="tech-tag">Cisco Packet Tracer</span>
+          <span class="tech-tag">VLAN</span>
+          <span class="tech-tag">RIP</span>
+          <span class="tech-tag">Firewall</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="projet-card reveal">
+      <div class="projet-thumb" style="background: linear-gradient(135deg, #e2f5f4, #b8e8e6);">🔒</div>
+      <div class="projet-body">
+        <span class="projet-tag">Sécurité</span>
+        <h3>Audit de sécurité et durcissement</h3>
+        <p>Réalisation d'un audit de sécurité sur un serveur Linux, identification des vulnérabilités et mise en place de mesures correctives.</p>
+        <div class="projet-techs">
+          <span class="tech-tag">Linux</span>
+          <span class="tech-tag">Lynis</span>
+          <span class="tech-tag">iptables</span>
+          <span class="tech-tag">SSH</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="projet-card reveal">
+      <div class="projet-thumb" style="background: linear-gradient(135deg, #eef0ff, #d0d5f8);">🖥️</div>
+      <div class="projet-body">
+        <span class="projet-tag">Windows Server</span>
+        <h3>Déploiement Active Directory</h3>
+        <p>Mise en place d'un domaine Active Directory complet avec gestion des utilisateurs, GPO, DNS et DHCP pour une PME fictive.</p>
+        <div class="projet-techs">
+          <span class="tech-tag">Windows Server 2022</span>
+          <span class="tech-tag">Active Directory</span>
+          <span class="tech-tag">GPO</span>
+          <span class="tech-tag">DNS</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="projet-card reveal">
+      <div class="projet-thumb" style="background: linear-gradient(135deg, #e8ffe8, #b8e8c0);">📦</div>
+      <div class="projet-body">
+        <span class="projet-tag">Virtualisation</span>
+        <h3>Lab virtualisé multi-services</h3>
+        <p>Création d'un environnement de lab avec VMWare hébergeant plusieurs VMs (serveur mail, serveur web, supervision Wazuh).</p>
+        <div class="projet-techs">
+          <span class="tech-tag">VMWare</span>
+          <span class="tech-tag">Wazuh</span>
+          <span class="tech-tag">Postfix</span>
+          <span class="tech-tag">Apache</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STAGES -->
+<section id="stages">
+  <div class="section-header reveal">
+    <div>
+      <span class="section-label">Expériences</span>
+      <h2>Stages en entreprise</h2>
+    </div>
+  </div>
+  <div class="timeline reveal">
+
+    <div class="timeline-item">
+      <div class="timeline-date">Jan – Fév 2025 · 5 semaines</div>
+      <div class="timeline-card">
+        <h3>Technicien réseau & systèmes</h3>
+        <p class="company">Entreprise XYZ · Ville</p>
+        <ul>
+          <li>Administration quotidienne des serveurs Windows Server et Linux</li>
+          <li>Configuration de switches et routeurs Cisco</li>
+          <li>Support utilisateurs et gestion des tickets via GLPI</li>
+          <li>Participation à la mise à jour du parc informatique</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Jan – Fév 2024 · 5 semaines</div>
+      <div class="timeline-card">
+        <h3>Technicien informatique</h3>
+        <p class="company">Entreprise ABC · Ville</p>
+        <ul>
+          <li>Diagnostic et résolution de pannes matérielles et logicielles</li>
+          <li>Installation et configuration de postes de travail</li>
+          <li>Assistance à l'administration du réseau local</li>
+          <li>Rédaction de documentation technique</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal">
+    <span class="section-label" style="color:rgba(255,255,255,0.4);">Contact</span>
+    <h2>Travaillons ensemble</h2>
+    <p>À la recherche d'un stage ou d'une alternance en infrastructure réseau et sécurité. N'hésitez pas à me contacter !</p>
+    <div class="contact-links">
+      <a href="mailto:ghiabad69@gmail.com" class="contact-link contact-link-primary">✉️ M'écrire un email</a>
+      <a href="https://linkedin.com" target="_blank" class="contact-link contact-link-ghost">💼 LinkedIn</a>
+      <a href="#" class="contact-link contact-link-ghost">📄 CV en PDF</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Adel Ghiaba · BTS SIO SISR · Fait avec passion
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Skill bars animation
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+          bar.style.width = bar.dataset.width + '%';
+        });
+        barObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.skill-card').forEach(card => barObserver.observe(card));
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+    });
+  });
+</script>
+
+</body>
+</html>
